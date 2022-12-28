@@ -5,14 +5,14 @@ import { useCallback } from "react";
 
 
 const CreateTaskForm = () => {
-  const { createTask } = useContext()
+  const { createTask, listId } = useContext()
   const router = useRouter()
   const handleSubmit = useCallback(
-    (values) => {
-      createTask(values)
+    ({title}) => {
+      createTask({title, listNameId: listId})
       router.push("/")
     },
-    [router, createTask]
+    [router, createTask, listId]
   )
 
   return (

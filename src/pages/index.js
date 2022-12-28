@@ -20,7 +20,7 @@ const NavLink = (props) => {
 }
 
 const Main = () => {
-  const { tasks, deleteTask } = useContext()
+  const { tasks, deleteTask, listId, updatedValue } = useContext()
 
   const handleClickDelete = useCallback(
     (event) => {
@@ -39,20 +39,30 @@ const Main = () => {
       <List title="ToDo List"></List>
 
       {tasks.map((task) => (
-        <ul key={task.id}>
-          <li className="border px-4 py-2 flex items-center">
-            <input className="m-4" type="checkbox" />
-            {task.title}
+        <>
+          {task.listNameId === listId ? (
+            <ul key={`_${task.id}`}>
+              <li className="border px-4 py-2 flex items-center">
+                <input
+                  onChange={() => updatedValue(task.id)}
+                  className="m-4"
+                  type="checkbox"
+                  name="valid"
+                  checked={task.valid ? true : false}
+                />
+                {task.title}
 
-            <NavLink href={`/task/${task.id}/update`}>
-              <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
-            </NavLink>
+                <NavLink href={`/task/${task.id}/update`}>
+                  <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
+                </NavLink>
 
-            <button data-task-id={task.id} onClick={handleClickDelete}>
-              <TrashIcon className="w-6 absolute right-4 -mt-2" />
-            </button>
-          </li>
-        </ul>
+                <button data-task-id={task.id} onClick={handleClickDelete}>
+                  <TrashIcon className="w-6 absolute right-4 -mt-2" />
+                </button>
+              </li>
+            </ul>
+          ) : null}
+        </>
       ))}
     </>
   )

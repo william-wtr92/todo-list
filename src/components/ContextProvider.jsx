@@ -5,39 +5,58 @@ import {
   useState,
 } from "react"
 
-const initialTasks = [
-  {
+const initialState = {
+  tasks: [{
     id: 1,
     title: "Item1",
-    valid: false
-  },
-]
+    valid: false,
+    listNameId: 1
+  }],
+  listName: [{
+    id: 1, 
+    name: "Homeworks"
+  }]
+
+}
+
+
 
 export const Context = createContext()
 
 export const useContext = () => useNativeContext(Context)
 
 const ContextProvider = (props) => {
-  const [nextId, setNextId] = useState(2)
-  const [tasks, setTasks] = useState(initialTasks)
+  const [nextTaskId, setNextTaskId] = useState(2)
+  const [nextListId, setNextListId] = useState(2)
+  const [tasks, setTasks] = useState(initialState.tasks)
+  const [lists, setLists] = useState(initialState.listName)
+  const [listId, setListId] = useState(1)
 
-  const getNextId = useCallback(() => {
-    setNextId(nextId + 1)
+  const getNextTaskId = useCallback(() => {
+    setNextTaskId(nextTaskId + 1)
 
-    return nextId
-  }, [nextId])
+    return nextTaskId
+  }, [nextTaskId])
+
+  
+  const updateListId = useCallback((id) => {
+    setListId(id)
+    console.log(id)
+  }, [setListId])
 
   const createTask = useCallback(
-    (task) => {
+    ({title, listNameId}) => {
       setTasks((tasks) => [
         ...tasks,
         {
-          id: getNextId(),
-          ...task,
+          id: getNextTaskId(),
+          title,
+          listNameId
         },
+  
       ])
     },
-    [getNextId]
+    [getNextTaskId]
   )
 
   const updatedTask = useCallback((updatedTask) => {
@@ -51,6 +70,50 @@ const ContextProvider = (props) => {
     []
   )
 
+  const getNextListId = useCallback(() => {
+    setNextListId(nextListId + 1)
+
+    return nextListId
+  }, [nextListId])
+
+  const createList = useCallback(
+    ({name}) => {
+      setLists((lists) => [
+        ...lists,
+        {
+          id: getNextListId(),
+          name,
+        },
+      ])
+    },
+    [getNextListId]
+  )
+
+  const updatedValue = useCallback((id) => {
+    const newTask = [...tasks]
+    newTask.forEach((task) => {
+      if (task.id === id && !task.valid) {
+        task.valid = true
+      } else if (task.id === id && task.valid) {
+        task.valid = false
+      }
+    })
+    setTasks((tasks) => [
+      ...tasks,
+    ])
+  }, [setTasks, tasks])
+
+   const checkAll = useCallback(() => {
+     const newTask = [...tasks]
+      newTask.filter((task) => {
+        task.valid === false
+    })
+    setTasks((tasks) => [
+      ...tasks,
+    ])
+    console.log("ok")
+  }, [setTasks, tasks])
+
   return (
     <Context.Provider
       {...props}
@@ -59,6 +122,12 @@ const ContextProvider = (props) => {
         createTask,
         deleteTask,
         updatedTask,
+        lists,
+        createList,
+        listId,
+        updateListId,
+        updatedValue,
+        checkAll
       }}
     />
   )

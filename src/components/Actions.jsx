@@ -2,6 +2,7 @@ import Link from "./Link"
 import classNames from "classnames"
 import { useRouter } from "next/router.js"
 import { TrashIcon, PlusIcon, PencilSquareIcon, CheckCircleIcon } from "@heroicons/react/24/solid"
+import { useContext } from "../components/ContextProvider"
 
 const NavLink = (props) => {
   const { asPath } = useRouter()
@@ -18,6 +19,7 @@ const NavLink = (props) => {
 
 const Actions = (props) => {
   const { children } = props
+  const { checkAll } = useContext()
 
   return (
     <main className="flex flex-col">
@@ -33,8 +35,8 @@ const Actions = (props) => {
             <li>
               <NavLink href="/task/[taskId]/delete/"><TrashIcon className="w-6"/></NavLink>
             </li>
-            <li className="absolute right-6">
-              <NavLink href="/"><CheckCircleIcon className="w-6"/></NavLink>
+            <li onClick={() => checkAll()} className="absolute right-6">
+              <CheckCircleIcon className="w-6"/>
             </li>
           </ul>
         </nav>
