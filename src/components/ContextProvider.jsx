@@ -103,16 +103,27 @@ const ContextProvider = (props) => {
     ])
   }, [setTasks, tasks])
 
-   const checkAll = useCallback(() => {
-     const newTask = [...tasks]
-      newTask.filter((task) => {
-        task.valid === false
-    })
-    setTasks((tasks) => [
-      ...tasks,
-    ])
-    console.log("ok")
-  }, [setTasks, tasks])
+  //  const checkAll = useCallback(() => {
+  //    const newTask = [...tasks]
+  //     newTask.filter((task) => {
+  //       task.valid === false
+  //   })
+  //   setTasks((tasks) => [
+  //     ...tasks,
+  //   ])
+  //   console.log("ok")
+  // }, [setTasks, tasks])
+
+  const updatedList = useCallback((updatedList) => {
+    setLists((lists) =>
+      lists.map((list) => (list.id === updatedList.id ? updatedList : list))
+    )
+  }, [])
+
+  const deleteList = useCallback(
+    (listId) => setLists((lists) => lists.filter((list) => list.id !== listId)),
+    []
+  )
 
   return (
     <Context.Provider
@@ -127,7 +138,10 @@ const ContextProvider = (props) => {
         listId,
         updateListId,
         updatedValue,
-        checkAll
+        updatedList,
+        deleteList
+        // checkAll
+        
       }}
     />
   )

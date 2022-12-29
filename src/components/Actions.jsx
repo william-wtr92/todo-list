@@ -1,5 +1,6 @@
 import Link from "./Link"
 import classNames from "classnames"
+import { useCallback } from "react"
 import { useRouter } from "next/router.js"
 import { TrashIcon, PlusIcon, PencilSquareIcon, CheckCircleIcon } from "@heroicons/react/24/solid"
 import { useContext } from "../components/ContextProvider"
@@ -19,7 +20,19 @@ const NavLink = (props) => {
 
 const Actions = (props) => {
   const { children } = props
-  const { checkAll } = useContext()
+  const { deleteList, listId } = useContext()
+
+  const handleClickDelete = useCallback(
+    (event) => {
+      const listId = Number.parseInt(
+        event.currentTarget.getAttribute("data-list-id"),
+        10
+      )
+
+      deleteList(listId)
+    },
+    [deleteList]
+  )
 
   return (
     <main className="flex flex-col">
@@ -30,12 +43,12 @@ const Actions = (props) => {
               <NavLink href="/task/create"><PlusIcon className="w-6"/></NavLink>
             </li>
             <li>
-              <NavLink href="/task/[taskId]/update"><PencilSquareIcon className="w-6"/></NavLink>
+              <NavLink href={`/list/${listId}/update`}><PencilSquareIcon className="w-6"/></NavLink>
             </li>
-            <li>
-              <NavLink href="/task/[taskId]/delete/"><TrashIcon className="w-6"/></NavLink>
+            <li data-list-id={listId} onClick={handleClickDelete}>
+              <TrashIcon className="w-6"/>
             </li>
-            <li onClick={() => checkAll()} className="absolute right-6">
+            <li /*onClick={() => checkAll()}*/ className="absolute right-6">
               <CheckCircleIcon className="w-6"/>
             </li>
           </ul>

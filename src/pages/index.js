@@ -45,7 +45,7 @@ const Main = () => {
               <li className="border px-4 py-2 flex items-center">
                 <input
                   onChange={() => updatedValue(task.id)}
-                  className="m-4"
+                  className="m-4 h-6 w-6"
                   type="checkbox"
                   name="valid"
                   checked={task.valid ? true : false}

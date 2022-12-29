@@ -35,27 +35,38 @@ const List = (props) => {
         <nav>
           <ul className="flex">
             {lists.map((list) => 
-              <div key={list.id} className="border-2 pl-4 pr-4 pt-1 text-center font-black rounded-lg border-b-0 relative">
-                <li onClick={() => updateListId(list.id)}>
+              <div key={list.id} className="border-2 pl-4 pr-4 pt-1 text-center font-black rounded-lg border-b-0 border-l-0 relative space-between">
+                <li onClick={() => updateListId(list.id)} className="mr-8">
                   {list.name}
                   
                 </li>
                 {tasks.map((task) => {
                     {task.listNameId === listId && task.valid ? calcul += 1 : null}
                     {task.listNameId === listId && task.valid ? (avg = calcul * 100 / tasks.length) : null}
+                  
                 }
               
                 )}
               
                 {list.id === listId ? (<div className={`bg-green-300  h-1 absolute left-0 bottom-0`} style={{ width: avg + "%" }}>
-                </div>): null}
-              
+                </div>) : null}
+
+                {list.id === listId ? (<div className=" bg-green-300 h-5 w-4 rounded-md absolute right-6 bottom-4">
+                  {calcul}
+                </div>) : null}
+
+                {list.id === listId ? (<div className=" bg-blue-300 h-5 w-4 rounded-md absolute right-2 bottom-4">
+                  {tasks.length}
+                </div>) : null}
+                  
               </div>
 
             )}
-            <li className="border-2 p-2 rounded-lg border-l-0 border-b-0">
+
+            <li className="ml-2 border-2 p-2 rounded-lg border-l-1 border-b-0">
               <NavLink href="/list/create"><PlusIcon className="w-6"/></NavLink>
             </li>
+
           </ul>
         </nav>
       </header>
