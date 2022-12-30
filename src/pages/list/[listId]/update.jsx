@@ -19,7 +19,6 @@ const ListUpdatePage = (props) => {
   const router = useRouter()
   const handleSubmit = useCallback(
     (values) => {
-      console.log(values)
       updatedList(values)
       router.push("/")
     },

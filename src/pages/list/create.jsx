@@ -9,7 +9,6 @@ const CreateListForm = () => {
   const router = useRouter()
   const handleSubmit = useCallback(
     (values) => {
-      console.log(values);
       createList(values)
       router.push("/")
     },

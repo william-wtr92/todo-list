@@ -42,7 +42,6 @@ const ContextProvider = (props) => {
   
   const updateListId = useCallback((id) => {
     setListId(id)
-    console.log(id)
   }, [setListId])
 
   const createTask = useCallback(
@@ -118,7 +117,7 @@ const ContextProvider = (props) => {
   const filterTask = useCallback(() => {
     tasks.map((task) => {
       task.valid ? task.hidden = true : task.hidden = false
-      console.log(task)
+      // console.log(task)
     })
   }, [tasks])
   

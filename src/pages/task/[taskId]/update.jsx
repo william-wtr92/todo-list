@@ -19,7 +19,6 @@ const TaskUpdatePage = (props) => {
   const router = useRouter()
   const handleSubmit = useCallback(
     (values) => {
-      console.log(values)
       updatedTask(values)
       router.push("/")
     },

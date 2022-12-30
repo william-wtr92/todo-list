@@ -36,9 +36,10 @@ const List = (props) => {
           <ul className="flex">
             {lists.map((list) => 
               <div key={list.id} className="border-2 pl-4 pr-4 pt-1 text-center font-black rounded-lg border-b-0 border-l-0 relative space-between hover:cursor-pointer">
-                <li onClick={() => updateListId(list.id)} className="mr-8">
-                  {list.name}
-                  
+                <li onClick={() => updateListId(list.id)}>
+                  {
+                    list.id === listId ? (<div className="mr-8">{list.name}</div>): (<div>{list.name}</div>)
+                  }
                 </li>
                 {tasks.map((task) => {
                     {task.listNameId === listId && task.valid ? calcul += 1 : null}
