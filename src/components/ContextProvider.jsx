@@ -94,8 +94,10 @@ const ContextProvider = (props) => {
     newTask.forEach((task) => {
       if (task.id === id && !task.valid) {
         task.valid = true
+        task.hidden = true
       } else if (task.id === id && task.valid) {
         task.valid = false
+        task.hidden = false
       }
     })
     setTasks((tasks) => [
@@ -115,10 +117,7 @@ const ContextProvider = (props) => {
     [])
   
   const filterTask = useCallback(() => {
-    tasks.map((task) => {
-      task.valid ? task.hidden = true : task.hidden = false
-      // console.log(task)
-    })
+    tasks.filter((task) => !task.hidden).map((task) => console.log(task))
   }, [tasks])
   
   

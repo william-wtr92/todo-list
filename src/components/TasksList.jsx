@@ -5,6 +5,7 @@ import Actions from "./Actions"
 import { useRouter } from "next/router.js"
 import { PlusIcon } from "@heroicons/react/24/solid"
 import { useContext } from "../components/ContextProvider"
+import { useState, useEffect } from "react"
 
 const NavLink = (props) => {
   const { asPath } = useRouter()
@@ -22,8 +23,10 @@ const NavLink = (props) => {
 const List = (props) => {
   const { title = "ToDo List", children } = props
   const { lists, updateListId, tasks, listId } = useContext();
+  
+  const taskFilter = tasks.filter((task) => task.listNameId === listId)
+  const taskCount = tasks.filter((task) => task.listNameId === listId && task.valid)
 
-  let calcul = 0;
   let avg = 0;
 
   return (
@@ -42,9 +45,7 @@ const List = (props) => {
                   }
                 </li>
                 {tasks.map((task) => {
-                    {task.listNameId === listId && task.valid ? calcul += 1 : null}
-                    {task.listNameId === listId && task.valid ? (avg = calcul * 100 / tasks.length) : null}
-                  
+                    {task.listNameId === listId && task.valid ? (avg = taskCount.length * 100 / taskFilter.length) : null}
                 }
               
                 )}
@@ -53,11 +54,11 @@ const List = (props) => {
                 </div>) : null}
 
                 {list.id === listId ? (<div className=" bg-green-300 h-5 w-4 rounded-md absolute right-6 bottom-4">
-                  {calcul}
+                  {taskCount.length}
                 </div>) : null}
 
                 {list.id === listId ? (<div className=" bg-blue-300 h-5 w-4 rounded-md absolute right-2 bottom-4">
-                  {tasks.length}
+                  {taskFilter.length}
                 </div>) : null}
                   
               </div>
