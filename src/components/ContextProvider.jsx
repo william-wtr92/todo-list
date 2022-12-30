@@ -10,7 +10,8 @@ const initialState = {
     id: 1,
     title: "Item1",
     valid: false,
-    listNameId: 1
+    listNameId: 1,
+    hidden: false
   }],
   listName: [{
     id: 1, 
@@ -103,30 +104,28 @@ const ContextProvider = (props) => {
     ])
   }, [setTasks, tasks])
 
-  //  const checkAll = useCallback(() => {
-  //    const newTask = [...tasks]
-  //     newTask.filter((task) => {
-  //       task.valid === false
-  //   })
-  //   setTasks((tasks) => [
-  //     ...tasks,
-  //   ])
-  //   console.log("ok")
-  // }, [setTasks, tasks])
-
+  
   const updatedList = useCallback((updatedList) => {
     setLists((lists) =>
-      lists.map((list) => (list.id === updatedList.id ? updatedList : list))
+    lists.map((list) => (list.id === updatedList.id ? updatedList : list))
     )
   }, [])
 
   const deleteList = useCallback(
     (listId) => setLists((lists) => lists.filter((list) => list.id !== listId)),
-    []
-  )
-
-  return (
-    <Context.Provider
+    [])
+  
+  const filterTask = useCallback(() => {
+    tasks.map((task) => {
+      task.valid ? task.hidden = true : task.hidden = false
+      console.log(task)
+    })
+  }, [tasks])
+  
+  
+    
+    return (
+      <Context.Provider
       {...props}
       value={{
         tasks,
@@ -139,8 +138,8 @@ const ContextProvider = (props) => {
         updateListId,
         updatedValue,
         updatedList,
-        deleteList
-        // checkAll
+        deleteList,
+        filterTask
         
       }}
     />

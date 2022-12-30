@@ -44,13 +44,14 @@ const Main = () => {
             <ul key={`_${task.id}`}>
               <li className="border px-4 py-2 flex items-center">
                 <input
+                  className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 "
                   onChange={() => updatedValue(task.id)}
-                  className="m-4 h-6 w-6"
                   type="checkbox"
                   name="valid"
                   checked={task.valid ? true : false}
                 />
-                {task.title}
+
+                <div className="hover:cursor-pointer">{task.title}</div>
 
                 <NavLink href={`/task/${task.id}/update`}>
                   <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />

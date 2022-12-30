@@ -20,7 +20,7 @@ const NavLink = (props) => {
 
 const Actions = (props) => {
   const { children } = props
-  const { deleteList, listId } = useContext()
+  const { deleteList, listId, filterTask } = useContext()
 
   const handleClickDelete = useCallback(
     (event) => {
@@ -45,10 +45,10 @@ const Actions = (props) => {
             <li>
               <NavLink href={`/list/${listId}/update`}><PencilSquareIcon className="w-6"/></NavLink>
             </li>
-            <li data-list-id={listId} onClick={handleClickDelete}>
+            <li data-list-id={listId} onClick={handleClickDelete} className="hover:cursor-pointer">
               <TrashIcon className="w-6"/>
             </li>
-            <li /*onClick={() => checkAll()}*/ className="absolute right-6">
+            <li onClick={() => filterTask()} className="absolute right-6 hover:cursor-pointer">
               <CheckCircleIcon className="w-6"/>
             </li>
           </ul>
