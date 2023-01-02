@@ -32,6 +32,7 @@ const ContextProvider = (props) => {
   const [tasks, setTasks] = useState(initialState.tasks)
   const [lists, setLists] = useState(initialState.listName)
   const [listId, setListId] = useState(1)
+  const [filter, setFilter] = useState(false)
 
   const getNextTaskId = useCallback(() => {
     setNextTaskId(nextTaskId + 1)
@@ -115,14 +116,8 @@ const ContextProvider = (props) => {
   const deleteList = useCallback(
     (listId) => setLists((lists) => lists.filter((list) => list.id !== listId)),
     [])
-  
-  const filterTask = useCallback(() => {
-    tasks.filter((task) => !task.hidden).map((task) => console.log(task))
-  }, [tasks])
-  
-  
     
-    return (
+  return (
       <Context.Provider
       {...props}
       value={{
@@ -137,7 +132,8 @@ const ContextProvider = (props) => {
         updatedValue,
         updatedList,
         deleteList,
-        filterTask
+        filter,
+        setFilter
         
       }}
     />

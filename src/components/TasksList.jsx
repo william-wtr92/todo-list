@@ -44,22 +44,25 @@ const List = (props) => {
                     list.id === listId ? (<div className="mr-8">{list.name}</div>): (<div>{list.name}</div>)
                   }
                 </li>
+                
                 {tasks.map((task) => {
                     {task.listNameId === listId && task.valid ? (avg = taskCount.length * 100 / taskFilter.length) : null}
                 }
               
                 )}
               
-                {list.id === listId ? (<div className={`bg-green-300  h-1 absolute left-0 bottom-0 transition-all ease-out duration-1000`} style={{ width: avg + "%" }}>
-                </div>) : null}
-
-                {list.id === listId ? (<div className=" bg-green-300 h-5 w-4 rounded-md absolute right-6 bottom-4">
-                  {taskCount.length}
-                </div>) : null}
-
-                {list.id === listId ? (<div className=" bg-blue-300 h-5 w-4 rounded-md absolute right-2 bottom-4">
-                  {taskFilter.length}
-                </div>) : null}
+                {list.id === listId ? (
+                  <div>
+                    <div className={`bg-green-300  h-1 absolute left-0 bottom-0 transition-all ease-out duration-1000`} style={{ width: avg + "%" }}>
+                    </div>
+                    <div className=" bg-green-300 h-5 w-4 rounded-md absolute right-6 bottom-4">
+                      {taskCount.length}
+                    </div>
+                    <div className=" bg-blue-300 h-5 w-4 rounded-md absolute right-2 bottom-4">
+                      {taskFilter.length}
+                    </div>
+                  </div>
+                ) : null}
                   
               </div>
 

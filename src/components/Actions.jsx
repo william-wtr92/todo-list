@@ -20,7 +20,7 @@ const NavLink = (props) => {
 
 const Actions = (props) => {
   const { children } = props
-  const { deleteList, listId, filterTask } = useContext()
+  const { deleteList, listId, filter, setFilter } = useContext()
 
   const handleClickDelete = useCallback(
     (event) => {
@@ -33,6 +33,14 @@ const Actions = (props) => {
     },
     [deleteList]
   )
+
+  const filterTask = useCallback(() => {
+    if (filter === true) {
+      setFilter(false)
+    } else if (filter === false) {
+      setFilter(true)
+    }
+  }, [filter, setFilter])
 
   return (
     <main className="flex flex-col">
