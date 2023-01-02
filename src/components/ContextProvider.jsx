@@ -8,7 +8,7 @@ import {
 const initialState = {
   tasks: [{
     id: 1,
-    title: "Item1",
+    title: "ToDo List",
     valid: false,
     listNameId: 1,
     hidden: false
