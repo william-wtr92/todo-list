@@ -1,6 +1,6 @@
 import List from "../components/TasksList"
 import { useContext } from "../components/ContextProvider"
-import { useCallback } from "react"
+import { Fragment, useCallback } from "react"
 import Link from "../components/Link"
 import { useRouter } from "next/router.js"
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/solid"
@@ -40,65 +40,63 @@ const Main = () => {
     <>
       <List title="ToDo List"></List>
 
-      <ul>
-        {filter
-          ? hiddenTask.map((task) => (
-              <>
-                {task.listNameId === listId ? (
-                  <li
-                    key={task.id}
-                    className="border px-4 py-2 flex items-center"
-                  >
-                    <input
-                      className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 "
-                      onChange={() => updatedValue(task.id)}
-                      type="checkbox"
-                      name="valid"
-                      checked={task.valid ? true : false}
-                    />
+      {filter
+        ? hiddenTask.map((task) => (
+            <Fragment key={task.id}>
+              {task.listNameId === listId ? (
+                <li
+                  key={task.id}
+                  className="border px-4 py-2 flex items-center"
+                >
+                  <input
+                    className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 "
+                    onChange={() => updatedValue(task.id)}
+                    type="checkbox"
+                    name="valid"
+                    checked={task.valid ? true : false}
+                  />
 
-                    <div className="hover:cursor-pointer">{task.title}</div>
+                  <div className="hover:cursor-pointer">{task.title}</div>
 
-                    <NavLink href={`/task/${task.id}/update`}>
-                      <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
-                    </NavLink>
+                  <NavLink href={`/task/${task.id}/update`}>
+                    <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
+                  </NavLink>
 
-                    <button data-task-id={task.id} onClick={handleClickDelete}>
-                      <TrashIcon className="w-6 absolute right-4 -mt-2" />
-                    </button>
-                  </li>
-                ) : null}
-              </>
-            ))
-          : tasks.map((task) => (
-              <>
-                {task.listNameId === listId ? (
-                  <li
-                    key={task.id}
-                    className="border px-4 py-2 flex items-center"
-                  >
-                    <input
-                      className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 "
-                      onChange={() => updatedValue(task.id)}
-                      type="checkbox"
-                      name="valid"
-                      checked={task.valid ? true : false}
-                    />
+                  <button data-task-id={task.id} onClick={handleClickDelete}>
+                    <TrashIcon className="w-6 absolute right-4 -mt-2" />
+                  </button>
+                </li>
+              ) : null}
+            </Fragment>
+          ))
+        : tasks.map((task) => (
+            <Fragment key={task.id}>
+              {task.listNameId === listId ? (
+                <li
+                  key={task.id}
+                  className="border px-4 py-2 flex items-center"
+                >
+                  <input
+                    className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 "
+                    onChange={() => updatedValue(task.id)}
+                    type="checkbox"
+                    name="valid"
+                    checked={task.valid ? true : false}
+                  />
 
-                    <div className="hover:cursor-pointer">{task.title}</div>
+                  <div className="hover:cursor-pointer">{task.title}</div>
 
-                    <NavLink href={`/task/${task.id}/update`}>
-                      <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
-                    </NavLink>
+                  <NavLink href={`/task/${task.id}/update`}>
+                    <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
+                  </NavLink>
 
-                    <button data-task-id={task.id} onClick={handleClickDelete}>
-                      <TrashIcon className="w-6 absolute right-4 -mt-2" />
-                    </button>
-                  </li>
-                ) : null}
-              </>
-            ))}
-      </ul>
+                  <button data-task-id={task.id} onClick={handleClickDelete}>
+                    <TrashIcon className="w-6 absolute right-4 -mt-2" />
+                  </button>
+                </li>
+              ) : null}
+            </Fragment>
+          ))}
     </>
   )
 }
