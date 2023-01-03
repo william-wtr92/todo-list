@@ -40,12 +40,15 @@ const Main = () => {
     <>
       <List title="ToDo List"></List>
 
-      {filter
-        ? hiddenTask.map((task) => (
-            <>
-              {task.listNameId === listId ? (
-                <ul key={`_${task.id}`}>
-                  <li className="border px-4 py-2 flex items-center">
+      <ul>
+        {filter
+          ? hiddenTask.map((task) => (
+              <>
+                {task.listNameId === listId ? (
+                  <li
+                    key={task.id}
+                    className="border px-4 py-2 flex items-center"
+                  >
                     <input
                       className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 "
                       onChange={() => updatedValue(task.id)}
@@ -64,15 +67,16 @@ const Main = () => {
                       <TrashIcon className="w-6 absolute right-4 -mt-2" />
                     </button>
                   </li>
-                </ul>
-              ) : null}
-            </>
-          ))
-        : tasks.map((task) => (
-            <>
-              {task.listNameId === listId ? (
-                <ul key={`_${task.id}`}>
-                  <li className="border px-4 py-2 flex items-center">
+                ) : null}
+              </>
+            ))
+          : tasks.map((task) => (
+              <>
+                {task.listNameId === listId ? (
+                  <li
+                    key={task.id}
+                    className="border px-4 py-2 flex items-center"
+                  >
                     <input
                       className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 "
                       onChange={() => updatedValue(task.id)}
@@ -91,10 +95,10 @@ const Main = () => {
                       <TrashIcon className="w-6 absolute right-4 -mt-2" />
                     </button>
                   </li>
-                </ul>
-              ) : null}
-            </>
-          ))}
+                ) : null}
+              </>
+            ))}
+      </ul>
     </>
   )
 }
