@@ -37,7 +37,7 @@ const List = (props) => {
         <nav>
           <ul className="flex">
             {lists.map((list) => 
-              <div key={list.id} className="border-2 pl-4 pr-4 pt-1 text-center font-black rounded-lg border-b-0 border-l-0 relative space-between hover:cursor-pointer">
+              <div key={list.id} className="border-2 pl-4 pr-4 pt-2 text-center font-black rounded-lg border-b-0 border-l-0 relative space-between hover:cursor-pointer">
                 <li onClick={() => updateListId(list.id)}>
                   {
                     list.id === listId ? (<div className="mr-8">{list.name}</div>) : (<div>{list.name}</div>)
@@ -57,12 +57,12 @@ const List = (props) => {
                     <div className={`bg-green-300  h-1 absolute left-0 bottom-0 transition-all ease-out duration-1000`}
                       style={{ width: avg + "%" }}>
                     </div>
-                    <div className=" bg-green-300 h-5 w-5 rounded-md absolute right-6 bottom-4">
+                    <div className=" bg-green-300 h-5 w-5 rounded-md absolute right-6 bottom-3">
                       <div className="relative bottom-px">
                         {taskCount.length}
                       </div>
                     </div>
-                    <div className=" bg-blue-500 h-5 w-4 rounded-md absolute right-3 bottom-4">
+                    <div className=" bg-blue-500 h-5 w-4 rounded-md absolute right-3 bottom-3">
                       <div className="relative bottom-px">
                         {taskFilter.length}
                       </div>
