@@ -62,7 +62,7 @@ const List = (props) => {
                         {taskCount.length}
                       </div>
                     </div>
-                    <div className=" bg-blue-500 h-5 w-4 rounded-md absolute right-3 bottom-3 z-0">
+                    <div className=" bg-blue-500 h-5 w-5 rounded-md absolute right-2 bottom-3 z-0">
                       <div className="relative bottom-px left-px">
                         {taskFilter.length}
                       </div>

@@ -1,6 +1,6 @@
 import List from "../components/TasksList"
 import { useContext } from "../components/ContextProvider"
-import { Fragment, useCallback } from "react"
+import { Fragment, useCallback, useState } from "react"
 import Link from "../components/Link"
 import { useRouter } from "next/router.js"
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/solid"
@@ -21,6 +21,7 @@ const NavLink = (props) => {
 
 const Main = () => {
   const { tasks, deleteTask, listId, updatedValue, filter } = useContext()
+  const [show, setShow] = useState(false)
 
   const handleClickDelete = useCallback(
     (event) => {
@@ -34,6 +35,12 @@ const Main = () => {
     [deleteTask]
   )
 
+  const handleEnter = (taskId) => {
+    setTimeout(() => {
+      setShow(taskId)
+    }, 300)
+  }
+
   const hiddenTask = tasks.filter((task) => !task.hidden)
 
   return (
@@ -46,6 +53,12 @@ const Main = () => {
               {task.listNameId === listId ? (
                 <li
                   key={task.id}
+                  onMouseEnter={() => {
+                    handleEnter(task.id)
+                  }}
+                  onMouseLeave={() => {
+                    setShow(false)
+                  }}
                   className="border px-4 py-2 flex items-center"
                 >
                   <input
@@ -58,13 +71,20 @@ const Main = () => {
 
                   <div className="hover:cursor-pointer">{task.title}</div>
 
-                  <NavLink href={`/task/${task.id}/update`}>
-                    <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
-                  </NavLink>
+                  {show === task.id ? (
+                    <>
+                      <NavLink href={`/task/${task.id}/update`}>
+                        <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
+                      </NavLink>
 
-                  <button data-task-id={task.id} onClick={handleClickDelete}>
-                    <TrashIcon className="w-6 absolute right-4 -mt-2" />
-                  </button>
+                      <button
+                        data-task-id={task.id}
+                        onClick={handleClickDelete}
+                      >
+                        <TrashIcon className="w-6 absolute right-4 -mt-2" />
+                      </button>
+                    </>
+                  ) : null}
                 </li>
               ) : null}
             </Fragment>
@@ -74,6 +94,12 @@ const Main = () => {
               {task.listNameId === listId ? (
                 <li
                   key={task.id}
+                  onMouseEnter={() => {
+                    handleEnter(task.id)
+                  }}
+                  onMouseLeave={() => {
+                    setShow(false)
+                  }}
                   className="border px-4 py-2 flex items-center"
                 >
                   <input
@@ -86,13 +112,20 @@ const Main = () => {
 
                   <div className="hover:cursor-pointer">{task.title}</div>
 
-                  <NavLink href={`/task/${task.id}/update`}>
-                    <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
-                  </NavLink>
+                  {show === task.id ? (
+                    <>
+                      <NavLink href={`/task/${task.id}/update`}>
+                        <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
+                      </NavLink>
 
-                  <button data-task-id={task.id} onClick={handleClickDelete}>
-                    <TrashIcon className="w-6 absolute right-4 -mt-2" />
-                  </button>
+                      <button
+                        data-task-id={task.id}
+                        onClick={handleClickDelete}
+                      >
+                        <TrashIcon className="w-6 absolute right-4 -mt-2" />
+                      </button>
+                    </>
+                  ) : null}
                 </li>
               ) : null}
             </Fragment>
