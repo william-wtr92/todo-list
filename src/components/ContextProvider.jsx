@@ -113,7 +113,10 @@ const ContextProvider = (props) => {
   }, [])
 
   const deleteList = useCallback(
-    (listId) => setLists((lists) => lists.filter((list) => list.id !== listId)),
+    (listId) => {
+    setTasks((tasks) => tasks.filter((task) => task.listNameId !== listId));
+    setLists((lists) => lists.filter((list) => list.id !== listId));
+    },
     [])
     
   return (

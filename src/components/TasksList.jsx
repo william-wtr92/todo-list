@@ -69,7 +69,9 @@ const List = (props) => {
         </nav>
       </header>
       <section>
-        <Actions />
+        {lists.length > 0 ? (<Actions />) : (<div className="m-4 font-bold border-2 border-gray-200 text-center p-2 rounded-lg">
+          Add a new list ...
+        </div>)}
         {children}
       </section>
     </main>
