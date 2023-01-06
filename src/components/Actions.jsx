@@ -1,22 +1,7 @@
-import Link from "./Link"
-import classNames from "classnames"
 import { useCallback } from "react"
-import { useRouter } from "next/router.js"
 import { TrashIcon, PlusIcon, PencilSquareIcon, CheckCircleIcon } from "@heroicons/react/24/solid"
-import { useContext } from "../components/ContextProvider"
-
-const NavLink = (props) => {
-  const { asPath } = useRouter()
-
-  return (
-    <Link
-      {...props}
-      className={classNames("text-lg font-semibold", {
-        underline: asPath === props.href,
-      })}
-    />
-  )
-}
+import { useContext } from "./ContextProvider"
+import { NavLink } from "./NavLink"
 
 const Actions = (props) => {
   const { children } = props
@@ -43,7 +28,7 @@ const Actions = (props) => {
   }, [filter, setFilter])
 
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col sticky top-20 bg-white">
       <div className="flex p-4 justify-between items-center border-b">
         <nav>
           <ul className="flex gap-4">

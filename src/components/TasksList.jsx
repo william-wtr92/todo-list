@@ -2,22 +2,9 @@ import Link from "./Link"
 import classNames from "classnames"
 import Head from "next/head.js"
 import Actions from "./Actions"
-import { useRouter } from "next/router.js"
 import { PlusIcon } from "@heroicons/react/24/solid"
 import { useContext } from "../components/ContextProvider"
-
-const NavLink = (props) => {
-  const { asPath } = useRouter()
-
-  return (
-    <Link
-      {...props}
-      className={classNames("text-lg font-semibold", {
-        underline: asPath === props.href,
-      })}
-    />
-  )
-}
+import { NavLink } from "./NavLink"
 
 const List = (props) => {
   const { title = "ToDo List", children } = props
@@ -29,11 +16,11 @@ const List = (props) => {
   let avg = 0;
 
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col bg-white sticky top-0">
       <Head>
         <title>{title}</title>
       </Head>
-      <header className="flex pl-2 pt-2 justify-between items-center border-b">
+      <header className="flex pl-2 pt-2 justify-between items-center border-b overflow-x-auto">
         <nav>
           <ul className="flex">
             {lists.map((list) => 

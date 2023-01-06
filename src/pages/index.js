@@ -1,23 +1,8 @@
 import List from "../components/TasksList"
 import { useContext } from "../components/ContextProvider"
 import { Fragment, useCallback, useState } from "react"
-import Link from "../components/Link"
-import { useRouter } from "next/router.js"
-import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/solid"
-import classNames from "classnames"
-
-const NavLink = (props) => {
-  const { asPath } = useRouter()
-
-  return (
-    <Link
-      {...props}
-      className={classNames("text-lg font-semibold", {
-        underline: asPath === props.href,
-      })}
-    />
-  )
-}
+import { TrashIcon } from "@heroicons/react/24/solid"
+import { NavLink } from "../components/NavLink"
 
 const Main = () => {
   const { tasks, deleteTask, listId, updatedValue, filter } = useContext()
@@ -38,7 +23,7 @@ const Main = () => {
   const handleEnter = (taskId) => {
     setTimeout(() => {
       setShow(taskId)
-    }, 300)
+    }, 200)
   }
 
   const hiddenTask = tasks.filter((task) => !task.hidden)
@@ -69,19 +54,19 @@ const Main = () => {
                     checked={task.valid ? true : false}
                   />
 
-                  <div className="hover:cursor-pointer">{task.title}</div>
+                  <div className="hover:cursor-pointer">
+                    <NavLink href={`/task/${task.id}/update`}>
+                      {task.title}
+                    </NavLink>
+                  </div>
 
                   {show === task.id ? (
                     <>
-                      <NavLink href={`/task/${task.id}/update`}>
-                        <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
-                      </NavLink>
-
                       <button
                         data-task-id={task.id}
                         onClick={handleClickDelete}
                       >
-                        <TrashIcon className="w-6 absolute right-4 -mt-2" />
+                        <TrashIcon className="w-6 absolute right-10 -mt-2" />
                       </button>
                     </>
                   ) : null}
@@ -110,19 +95,19 @@ const Main = () => {
                     checked={task.valid ? true : false}
                   />
 
-                  <div className="hover:cursor-pointer">{task.title}</div>
+                  <div className="hover:cursor-pointer">
+                    <NavLink href={`/task/${task.id}/update`}>
+                      {task.title}
+                    </NavLink>
+                  </div>
 
                   {show === task.id ? (
                     <>
-                      <NavLink href={`/task/${task.id}/update`}>
-                        <PencilSquareIcon className="w-6 absolute right-12 -mt-2" />
-                      </NavLink>
-
                       <button
                         data-task-id={task.id}
                         onClick={handleClickDelete}
                       >
-                        <TrashIcon className="w-6 absolute right-4 -mt-2" />
+                        <TrashIcon className="w-6 absolute right-10 -mt-2" />
                       </button>
                     </>
                   ) : null}

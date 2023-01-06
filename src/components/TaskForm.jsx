@@ -1,23 +1,9 @@
 import * as yup from "yup";
 import { Form, Formik } from "formik"
 import Formfield from "../components/FormField";
-import Link from "../components/Link";
-import { useRouter } from "next/router.js"
-import classNames from "classnames";
 import { XMarkIcon } from "@heroicons/react/24/solid"
+import { NavLink } from "./NavLink";
 
-const NavLink = (props) => {
-  const { asPath } = useRouter()
-
-  return (
-    <Link
-      {...props}
-      className={classNames("text-lg font-semibold", {
-        underline: asPath === props.href,
-      })}
-    />
-  )
-}
 
 const defaultValidationSchema = yup.object().shape({
   title: yup.string().required().label("title")
