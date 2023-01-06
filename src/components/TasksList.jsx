@@ -57,13 +57,13 @@ const List = (props) => {
                     <div className={`bg-green-300  h-1 absolute left-0 bottom-0 transition-all ease-out duration-1000`}
                       style={{ width: avg + "%" }}>
                     </div>
-                    <div className=" bg-green-300 h-5 w-5 rounded-md absolute right-6 bottom-3">
+                    <div className=" bg-green-300 h-5 w-5 rounded-md absolute right-6 bottom-3 z-10">
                       <div className="relative bottom-px">
                         {taskCount.length}
                       </div>
                     </div>
-                    <div className=" bg-blue-500 h-5 w-4 rounded-md absolute right-3 bottom-3">
-                      <div className="relative bottom-px">
+                    <div className=" bg-blue-500 h-5 w-4 rounded-md absolute right-3 bottom-3 z-0">
+                      <div className="relative bottom-px left-px">
                         {taskFilter.length}
                       </div>
                     </div>
