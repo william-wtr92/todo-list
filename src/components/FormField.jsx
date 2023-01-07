@@ -2,8 +2,6 @@ import classNames from "classnames";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 import { Field } from "formik";
 
-
-
 const FormField = (props) => {
   const { name, label, className, placeholder, ...otherProps } = props;
 
