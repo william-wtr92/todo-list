@@ -24,7 +24,7 @@ const Main = () => {
   const handleEnter = (taskId) => {
     setTimeout(() => {
       setShow(taskId)
-    }, 200)
+    }, 250)
   }
 
   const hiddenTask = tasks.filter((task) => !task.hidden)
@@ -54,7 +54,7 @@ const Main = () => {
                       className="border px-4 py-2 flex items-center"
                     >
                       <input
-                        className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 transition-all ease-out duration-1000 "
+                        className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 transition-all ease-out duration-1000"
                         onChange={() => updatedValue(task.id)}
                         type="checkbox"
                         name="valid"
@@ -95,7 +95,7 @@ const Main = () => {
                       className="border px-4 py-2 flex items-center"
                     >
                       <input
-                        className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 transition-all ease-out duration-1000 "
+                        className="m-4 h-8 w-8 hover:cursor-pointer appearance-none border-2 rounded-md checked:bg-green-300 transition-all ease-out duration-1000"
                         onChange={() => updatedValue(task.id)}
                         type="checkbox"
                         name="valid"
@@ -113,8 +113,9 @@ const Main = () => {
                           <button
                             data-task-id={task.id}
                             onClick={handleClickDelete}
+                            className="opacity-100 transform-translate-x-0"
                           >
-                            <TrashIcon className="w-6 absolute right-10 -mt-2" />
+                            <TrashIcon className="w-6 absolute right-10 -mt-2 transition-all duration-200 ease-in-out" />
                           </button>
                         </>
                       ) : null}

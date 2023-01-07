@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 import { TrashIcon, PlusIcon, PencilSquareIcon, CheckCircleIcon } from "@heroicons/react/24/solid"
 import { useContext } from "./ContextProvider"
 import { NavLink } from "./NavLink"
@@ -6,6 +6,7 @@ import { NavLink } from "./NavLink"
 const Actions = (props) => {
   const { children } = props
   const { deleteList, listId, filter, setFilter } = useContext()
+  const [ buttonColor, setButtonColor] = useState('#000');
 
   const handleClickDelete = useCallback(
     (event) => {
@@ -20,12 +21,15 @@ const Actions = (props) => {
   )
 
   const filterTask = useCallback(() => {
-    if (filter === true) {
+    if (filter) {
       setFilter(false)
-    } else if (filter === false) {
+      setButtonColor('#000');
+    } else if (!filter) {
       setFilter(true)
-    }
+      setButtonColor('#0f0');
+    } 
   }, [filter, setFilter])
+
 
   return (
     <main className="flex flex-col sticky top-20 bg-white">
@@ -41,8 +45,8 @@ const Actions = (props) => {
             <li data-list-id={listId} onClick={handleClickDelete} className="hover:cursor-pointer">
               <TrashIcon className="w-6"/>
             </li>
-            <li onClick={() => filterTask()} className="absolute right-6 hover:cursor-pointer">
-              <CheckCircleIcon className="w-6"/>
+            <li onClick={filterTask} className="absolute right-6 hover:cursor-pointer">
+              <CheckCircleIcon className="w-6" color={buttonColor} />
             </li>
           </ul>
         </nav>
