@@ -22,9 +22,7 @@ const Main = () => {
   )
 
   const handleEnter = (taskId) => {
-    setTimeout(() => {
-      setShow(taskId)
-    }, 250)
+    setShow(taskId)
   }
 
   const hiddenTask = tasks.filter((task) => !task.hidden)
@@ -113,9 +111,8 @@ const Main = () => {
                           <button
                             data-task-id={task.id}
                             onClick={handleClickDelete}
-                            className="opacity-100 transform-translate-x-0"
                           >
-                            <TrashIcon className="w-6 absolute right-10 -mt-2 transition-all duration-200 ease-in-out" />
+                            <TrashIcon className="w-6 absolute right-10 -mt-2" />
                           </button>
                         </>
                       ) : null}
